@@ -1,13 +1,138 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* ═══════════════════════════════════════════════════════════════
+   LAZY LIZARD SMOKEHOUSE — SHOWCASE UI THEME
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Core Colors from Showcase Design */
+  --bg-dark:          #0D0E0E;       /* Deep charcoal / black */
+  --bg-dark-surface:  #141616;       /* Slightly lighter charcoal */
+  --bg-forest:        #132219;       /* Deep rich garden green */
+  --bg-forest-dark:   #0E1A13;       /* Darker garden shade */
+  --bg-cream:         #F5EFE6;       /* Warm cream / parchment */
+  --bg-cream-light:   #FAF7F2;       /* Ultra light cream */
+  --bg-white:         #FFFFFF;       /* Pure white card surface */
+  
+  /* Brand Accents */
+  --brand-orange:     #C85A24;       /* Terracotta / Pitmaster orange */
+  --brand-orange-hover: #B54D1B;     /* Deep terracotta on hover */
+  --brand-gold:       #E29338;       /* Warm golden amber for subtitles */
+  --brand-gold-muted: #C9832A;       /* Faded gold */
+  
+  /* Text Colors */
+  --text-dark:        #181A18;       /* Dark text on light backgrounds */
+  --text-dark-muted:  #68645E;       /* Faded text on light backgrounds */
+  --text-light:       #FFFFFF;       /* White text on dark */
+  --text-light-muted: rgba(255, 255, 255, 0.75); /* Muted on dark */
+  --border-light:     rgba(0, 0, 0, 0.08);
+  --border-cream:     rgba(74, 53, 32, 0.15);
+  --border-dark:      rgba(255, 255, 255, 0.12);
+
+  /* Typography */
+  --font-brush:       'Permanent Marker', cursive;
+  --font-heading:     'Oswald', sans-serif;
+  --font-body:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+.brush-font {
+  font-family: var(--font-brush);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--brand-gold);
+}
+
+/* ── Scroll Reveal System ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-zoom {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-zoom.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal[data-delay="100"],
+.reveal-left[data-delay="100"],
+.reveal-right[data-delay="100"],
+.reveal-zoom[data-delay="100"] { transition-delay: 0.08s; }
+
+.reveal[data-delay="200"],
+.reveal-left[data-delay="200"],
+.reveal-right[data-delay="200"],
+.reveal-zoom[data-delay="200"] { transition-delay: 0.16s; }
+
+.reveal[data-delay="300"],
+.reveal-left[data-delay="300"],
+.reveal-right[data-delay="300"],
+.reveal-zoom[data-delay="300"] { transition-delay: 0.24s; }
+
+.reveal[data-delay="400"],
+.reveal-left[data-delay="400"],
+.reveal-right[data-delay="400"],
+.reveal-zoom[data-delay="400"] { transition-delay: 0.32s; }

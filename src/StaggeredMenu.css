@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════════════════════
+   StaggeredMenu — Slide-in drawer with staggered link reveal
+   ═══════════════════════════════════════════════════════════ */
+
+/* Trigger button (hamburger / X) */
+.sm-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid currentColor;
+  border-radius: 8px;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease,
+    transform 0.18s ease;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.sm-trigger:hover {
+  transform: scale(1.08);
+}
+
+/* Backdrop */
+.sm-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 10, 4, 0);
+  z-index: 1100;
+  transition: background 0.38s ease;
+  backdrop-filter: blur(0px);
+}
+
+.sm-backdrop--visible {
+  background: rgba(20, 10, 4, 0.55);
+  backdrop-filter: blur(3px);
+}
+
+/* Drawer panel */
+.sm-drawer {
+  position: fixed;
+  top: 0;
+  height: 100dvh;
+  width: min(320px, 88vw);
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem 2rem 2rem;
+  overflow-y: auto;
+  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+}
+
+.sm-drawer--right {
+  right: 0;
+  transform: translateX(100%);
+  border-left: 3px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px 0 0 24px;
+}
+
+.sm-drawer--left {
+  left: 0;
+  transform: translateX(-100%);
+  border-right: 3px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0 24px 24px 0;
+}
+
+.sm-drawer--open {
+  transform: translateX(0);
+  box-shadow: -12px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.sm-drawer--left.sm-drawer--open {
+  box-shadow: 12px 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Logo inside drawer */
+.sm-logo {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sm-logo img {
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Nav item list */
+.sm-items {
+  list-style: none;
+  padding: 0;
+  margin: 2.5rem 0 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Each item — slides in + fades */
+.sm-item {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.38s ease, transform 0.38s ease;
+}
+
+.sm-drawer--left .sm-item {
+  transform: translateX(-28px);
+}
+
+.sm-item--visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Link */
+.sm-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  padding: 0.9rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.92);
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  border-radius: 8px;
+}
+
+.sm-link:hover {
+  color: #ffffff;
+  padding-left: 1rem;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Item numbering */
+.sm-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.08em;
+  min-width: 1.8rem;
+}
+
+/* Socials section */
+.sm-socials {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease 0.28s, transform 0.4s ease 0.28s;
+}
+
+.sm-socials--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sm-socials-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 1.25rem;
+}
+
+.sm-socials-row {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.sm-social-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: color 0.2s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+
+.sm-socials--visible .sm-social-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sm-social-link:hover {
+  color: #ffffff;
+}
+
+/* X close button inside drawer (top-right corner) */
+.sm-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.18s ease;
+}
+
+.sm-close:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: rotate(90deg);
+}
